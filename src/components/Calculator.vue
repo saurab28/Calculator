@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { ref, useTemplateRef, Ref, watch, KeepAlive, onBeforeUnmount, onBeforeMount } from 'vue'
+import {
+  ref,
+  useTemplateRef,
+  Ref,
+  onBeforeUnmount,
+  onBeforeMount,
+  watchEffect,
+  onBeforeUpdate,
+} from 'vue'
 import Display from './Display.vue'
 import { useCounterStore } from '../stores/counter'
 const displayList = ref<(number | string)[]>([])
@@ -85,23 +93,9 @@ type obj = {
   totalFinalsumList: any
 }
 
-// watch(
-//   [displayZeroequal, displayList],
-//   () => {
-//     if (displayList.value.length > 2) {
-//       if (displayZeroequal.value) {
-//         console.log('triggered')
-
-//         displayList.value = [...displayList.value.slice(1)]
-//       }
-//     }
-
-//     // console.log(JSON.stringify(displayList.value))
-//     // localStorage.setItem('displayList', JSON.stringify(displayList.value))
-//     // console.log('hello')
-//   },
-//   { once: true },
-// )
+onBeforeUpdate(() => {
+  sessionStorage.setItem('displayList', JSON.stringify(displayList.value))
+})
 
 const Dref: Ref<obj> = useTemplateRef('equalto')
 
