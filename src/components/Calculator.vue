@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useTemplateRef, Ref, watch, KeepAlive } from 'vue'
+import { ref, useTemplateRef, Ref, watch, KeepAlive, onBeforeUnmount, onBeforeMount } from 'vue'
 import Display from './Display.vue'
 import { useCounterStore } from '../stores/counter'
 const displayList = ref<(number | string)[]>([])
@@ -122,6 +122,15 @@ const allclear = (): void => {
   displayList.value = []
   showZero.value = false
 }
+
+onBeforeUnmount(() => {
+  sessionStorage.setItem('displayList', JSON.stringify(displayList.value))
+})
+
+onBeforeMount(() => {
+  displayList.value =
+    (JSON.parse(sessionStorage.getItem('displayList')) as (string | number)[]) || []
+})
 </script>
 
 <template>

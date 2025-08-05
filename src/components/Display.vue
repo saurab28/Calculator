@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watchEffect, watch } from 'vue'
+import { computed, reactive, ref, watchEffect, watch, onBeforeUnmount, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 const togglecont = ref<Boolean>(false)
 const displayZeroequal = ref<Boolean>(false)
-
 const props = defineProps<{ displayList: (string | number)[]; showZero: Boolean }>()
 
 const calculateTerms = (arr: (number | string)[]): number => {
