@@ -158,25 +158,24 @@ watchEffect(() => {
   }
   totalSum.value = calculateTotal.value
   totalFinalsumList.value = calculateFinalSum.value
+  
 })
 
-defineExpose({ totalSum, totalFinalsumList })
+defineExpose({ totalSum, totalFinalsumList , togglecont})
 </script>
 
 <template>
   <div
-    class="h-[147px] rounded-[20px] w-[400px] mb-2 border-solid bg-red-200 p-2 flex flex-col justify-between"
+    class="h-[147px] rounded-[20px] w-[400px] mb-2 border-solid bg-red-200 p-2 flex flex-col justify-between "
   >
-    <div class="flex flex-col items-end mb-2 relative">
-      <div class="border-black border-solid border rounded-sm active:bg-white" @click="toogle">
-        <font-awesome-icon icon="fa-solid fa-bars" />
+    <div class="flex flex-col items-end mb-2 relative top-[110px] right-[355px] ">
+      <div @click="toogle" v-if="!togglecont">
+        <font-awesome-icon icon="fa-solid fa-clock-rotate-left" />
       </div>
-      <RouterLink to="/history">
-        <div v-show="togglecont" class="bg-white w-[100px] rounded-md">
-          <font-awesome-icon icon="fa-solid fa-clock-rotate-left" />
-          history
-        </div>
-      </RouterLink>
+      <div v-else @click="toogle">
+        <font-awesome-icon icon="fa-solid fa-calculator" />
+      </div>
+      
     </div>
     <div class="h-[72px]">
       <div class="flex overflow-hidden justify-end relative top-[0px]">

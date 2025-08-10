@@ -19,10 +19,11 @@ import {
   faBars,
   faClockRotateLeft,
   faHouse,
+  faCalculator
 } from '@fortawesome/free-solid-svg-icons'
 // import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faUserSecret, faThumbsUp, faDeleteLeft, faBars, faClockRotateLeft, faHouse)
+library.add(faUserSecret, faThumbsUp, faDeleteLeft, faBars, faClockRotateLeft, faHouse, faCalculator)
 import router from './router'
 
 const app = createApp(App)
