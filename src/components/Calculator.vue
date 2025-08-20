@@ -123,9 +123,7 @@ const allclear = (): void => {
   showZero.value = false
 }
 
-onBeforeUnmount(() => {
-  sessionStorage.setItem('displayList', JSON.stringify(displayList.value))
-})
+
 
 onUnmounted(() => {
   window.removeEventListener("keydown",handleKeyboard)
@@ -180,14 +178,14 @@ const handleKeyboard = (e : KeyboardEvent) : void => {
 
 function handleKeyboardsty(key : string){
    const cont = document.querySelector(`[data-key="${key}"]`)
-   cont.classList.add("bg-slate-300", "rounded-[25px]", "border-[1px]");
-   setTimeout(() => cont.classList.remove("bg-slate-300", "rounded-[25px]", "border-[1px]"), 150);
+   cont.classList.add("bg-slate-300");
+   setTimeout(() => cont.classList.remove("bg-slate-300"), 150);
   
 }
 </script>
 
 <template>
-  <div class="bg-white p-3 flex flex-col rounded-[20px]">
+  <div class="bg-slate-400 p-3 flex flex-col rounded-[20px]">
     <div>
       <!-- <KeepAlive>
         <Display :displayList="displayList" ref="equalto" />
@@ -196,121 +194,115 @@ function handleKeyboardsty(key : string){
     </div>
 
     <div class="relative">
-      <div v-show="Dref?.togglecont" class="bg-white w-[100px] rounded-md absolute top-[4px] left-[10px]">
-        <div>
+      <div v-show="Dref?.togglecont" class="absolute top-[4px] left-[10px]">
            <History/>
-        </div>
+
       </div>
      
-      <div class="flex w-[400px] justify-evenly">
+      <div class="grid grid-cols-4 gap-2 mt-1">
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="allclear"
           data-key="Escape"
         >
           AC
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center  items-center size-[85px] m-1 text-center active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center  items-center active:bg-slate-300  "
           @click=""
         >
           ( )
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click=""
         >
           %
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click=""
         >
           /
         </div>
-      </div>
-      <div class="flex w-[400px] justify-evenly mb-3 mt-2">
+      
         <div
           v-for="eachDigit in [7, 8, 9]"
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="pushStyle(eachDigit)"
           :data-key="eachDigit"
         >
           {{ eachDigit }}
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="pushCross"
           data-key="*"
         >
           X
         </div>
-      </div>
-      <div class="flex w-[400px] justify-evenly mb-3">
+      
         <div
           v-for="eachDigit in [4, 5, 6]"
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="pushStyle(eachDigit)"
           :data-key="eachDigit"
         >
           {{ eachDigit }}
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300   "
           @click="pushSub"
           data-key="-"
         >
           -
         </div>
-      </div>
-      <div class="flex w-[400px] justify-evenly">
+      
         <div
           v-for="eachDigit in [1, 2, 3]"
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="pushStyle(eachDigit)"
           :data-key="eachDigit"
         >
           {{ eachDigit }}
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="pushAdd"
           data-key="+"
         >
           +
         </div>
-      </div>
-      <div class="flex w-[400px] justify-evenly">
         <div
           v-for="eachDigit in [0]"
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="pushStyle(eachDigit)"
           :data-key="eachDigit"
         >
           {{ eachDigit }}
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 text-center active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="pushPoint"
           data-key="."
         >
           .
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="deleteItems"
           data-key="Backspace"
         >
           <font-awesome-icon icon="fa-solid fa-delete-left" />
         </div>
         <div
-          class="border-solid border-[2px] rounded-[50px] border-black text-[40px] flex justify-center items-center size-[85px] m-1 active:bg-slate-300 active:rounded-[25px] active:border-[1px]"
+          class=" bg-white border-solid  rounded-[10px] border-black text-[40px] flex justify-center items-center active:bg-slate-300  "
           @click="isequalto"
           data-key="Enter"
         >
           =
         </div>
-      </div>
+        </div>
     </div>
   </div>
 </template>

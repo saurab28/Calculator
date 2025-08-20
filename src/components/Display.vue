@@ -36,7 +36,7 @@ const calculateFinalSum = computed<(number | string)[]>(() => {
         if (eachChar !== '.') {
           indexa = copyDisplayList.indexOf(eachChar)
           firstTerm = calculateTerms(props.displayList.slice(prevIndex, indexa))
-          // console.log(firstTerm)
+
           copyDisplayList[indexa] = 'C'
           finalsum.push(firstTerm)
           finalsum.push(eachChar)
@@ -48,7 +48,7 @@ const calculateFinalSum = computed<(number | string)[]>(() => {
         if (eachChar !== '.') {
           indexa = copyDisplayList.indexOf(eachChar)
           firstTerm = calculateTerms(props.displayList.slice(prevIndex, indexa))
-          // console.log(firstTerm)
+
           copyDisplayList[indexa] = 'C'
           finalsum.push(firstTerm)
           finalsum.push(eachChar)
@@ -60,7 +60,6 @@ const calculateFinalSum = computed<(number | string)[]>(() => {
     }
   }
 
-  // console.log(finalsum)
   return finalsum
 })
 
@@ -96,7 +95,6 @@ const calculateTotal = computed<number>(() => {
               }
             }
           }
-          // console.log(count);
         }
       })
     } else {
@@ -134,15 +132,7 @@ const calculateTotal = computed<number>(() => {
 type obj = {
   totalSum: number
 }
-// let totalSum = calculateTotal.value
-// const totalSumobj = reactive<obj>({
-//   totalSum: calculateTotal.value,
-// })
-// watchEffect(() => {
-//   totalSumobj.totalSum = calculateTotal.value // Keep it in sync!
-//   // console.log(totalSumobj)
-// })
-// defineExpose(totalSumobj)
+
 const toogle = (): void => {
   togglecont.value = !togglecont.value
 }
@@ -152,41 +142,39 @@ const totalFinalsumList = ref<(number | string)[]>([])
 watchEffect(() => {
   if (props.displayList.length == 0 && props.showZero) {
     displayZeroequal.value = true
-    // console.log(calculateFinalSum.value)
   } else {
     displayZeroequal.value = false
   }
   totalSum.value = calculateTotal.value
   totalFinalsumList.value = calculateFinalSum.value
-  
 })
 
-defineExpose({ totalSum, totalFinalsumList , togglecont})
+defineExpose({ totalSum, totalFinalsumList, togglecont })
 </script>
 
 <template>
   <div
-    class="h-[147px] rounded-[20px] w-[400px] mb-2 border-solid bg-red-200 p-2 flex flex-col justify-between "
+    class="h-[30vh] rounded-[20px]  w-full md:w-[400px] mb-2 border-solid bg-white p-2 flex flex-col justify-between relative"
   >
-    <div class="flex flex-col items-end mb-2 relative top-[110px] right-[355px] ">
+    <div class="flex flex-col items-end mb-2 absolute left-4 bottom-2">
       <div @click="toogle" v-if="!togglecont">
-        <font-awesome-icon icon="fa-solid fa-clock-rotate-left" />
+        <font-awesome-icon icon="fa-solid fa-clock-rotate-left" class="text-[20px]" />
       </div>
-      <div v-else @click="toogle">
+      <div v-else @click="toogle"  class="text-[20px]">
         <font-awesome-icon icon="fa-solid fa-calculator" />
       </div>
-      
     </div>
-    <div class="h-[72px]">
-      <div class="flex overflow-hidden justify-end relative top-[0px]">
-        <p v-for="eachItem in props.displayList" v-if="!displayZeroequal" class="text-[28px]">
+    <div class=" h-full flex flex-col justify-end">
+      <div class="flex overflow-hidden justify-end ">
+        <p v-for="eachItem in props.displayList" v-if="!displayZeroequal" class="text-[38px]">
           {{ eachItem }}
         </p>
-        <p v-else class="text-[28px]">0</p>
+        <p v-else class="text-[38px]">0</p>
       </div>
       <div class="flex justify-end" v-if="calculateFinalSum.length > 2">
-        <span class="ml-auto block text-[20px]">{{ calculateTotal }}</span>
+        <span class="ml-auto block text-[25px]">{{ calculateTotal }}</span>
       </div>
     </div>
   </div>
-</template>
+</template> 
+
